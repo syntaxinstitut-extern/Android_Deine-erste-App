@@ -1,25 +1,48 @@
 package de.syntax_institut.meineersteapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var button: Button
+    private lateinit var imageView: ImageView
+    private lateinit var textView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<Button>(R.id.button)
-        val imageView = findViewById<ImageView>(R.id.imageView)
+        textView = findViewById(R.id.textView)
+        imageView = findViewById(R.id.imageView)
+        button = findViewById(R.id.button)
 
         button.setOnClickListener {
-            if (Random.nextBoolean()) {
-                imageView.setImageResource(R.drawable.zahl)
-            } else {
-                imageView.setImageResource(R.drawable.kopf)
-            }
+            startAnimation()
+        }
+    }
+
+    private fun startAnimation() {
+        val animation = imageView.animate()
+        animation.duration = 1000
+        animation.withEndAction {
+            showResult()
+        }
+        animation.rotationYBy(3600f)
+    }
+
+    private fun showResult() {
+        if (Random.nextBoolean()) {
+            textView.text = "Zahl!"
+            imageView.setImageResource(R.drawable.zahl)
+        } else {
+            textView.text = "Kopf!"
+            imageView.setImageResource(R.drawable.kopf)
         }
     }
 }
