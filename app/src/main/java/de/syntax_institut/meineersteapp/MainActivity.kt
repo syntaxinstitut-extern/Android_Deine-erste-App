@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var button: Button
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         animation.withEndAction {
             showResult()
         }
-        animation.rotationYBy(3600f)
+        animation.rotationYBy(5*360f)
     }
 
     private fun showResult() {
